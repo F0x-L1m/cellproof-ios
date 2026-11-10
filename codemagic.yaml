@@ -1,0 +1,33 @@
+workflows:
+  cellproof-testflight:
+    name: CellProof → TestFlight
+    instance_type: mac_mini_m2
+    max_build_duration: 45
+    integrations:
+      # Name des App-Store-Connect-API-Keys aus Codemagic (Teams → Integrations → Developer Portal).
+      # Falls dein Key dort anders heißt: hier anpassen.
+      app_store_connect: CODEMAGIC_ASC_KEY
+    environment:
+      xcode: latest
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: de.foxlim.batterycheck
+    scripts:
+      - name: Xcode-Projekt erzeugen
+        script: |
+          brew install xcodegen
+          xcodegen generate
+      - name: Signatur einrichten
+        script: xcode-project use-profiles
+      - name: App bauen
+        script: |
+          xcode-project build-ipa \
+            --project "CellProof.xcodeproj" \
+            --scheme "CellProof"
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true

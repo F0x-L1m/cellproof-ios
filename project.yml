@@ -1,0 +1,35 @@
+name: CellProof
+options:
+  bundleIdPrefix: de.foxlim
+  deploymentTarget:
+    iOS: "17.0"
+  developmentLanguage: en
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "${BUILD_NUMBER}"
+targets:
+  CellProof:
+    type: application
+    platform: iOS
+    sources:
+      - path: CellProof
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: de.foxlim.batterycheck
+        PRODUCT_NAME: CellProof
+        INFOPLIST_FILE: CellProof/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        TARGETED_DEVICE_FAMILY: "1"
+        SUPPORTS_MACCATALYST: NO
+        ENABLE_PREVIEWS: NO
+        GENERATE_INFOPLIST_FILE: NO
+schemes:
+  CellProof:
+    build:
+      targets:
+        CellProof: all
+    archive:
+      config: Release
