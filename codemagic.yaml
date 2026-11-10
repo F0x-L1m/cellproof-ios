@@ -4,9 +4,9 @@ workflows:
     instance_type: mac_mini_m2
     max_build_duration: 45
     integrations:
-      # Name des App-Store-Connect-API-Keys aus Codemagic (Teams → Integrations → Developer Portal).
-      # Falls dein Key dort anders heißt: hier anpassen.
-      app_store_connect: CODEMAGIC_ASC_KEY
+      # App-Store-Connect-API-Key aus Codemagic (Settings → Integrations → Developer Portal).
+      # Der Key gilt für das ganze Apple-Konto, nicht nur für eine App.
+      app_store_connect: BoksControl
     environment:
       xcode: latest
       ios_signing:
